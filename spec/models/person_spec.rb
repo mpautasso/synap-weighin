@@ -1,6 +1,14 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Person do
+  describe 'validations' do
+    describe 'validate associations' do
+      it { should have_many(:checkins) }
+      it { should have_many(:user_person_joins) }
+      it { should have_many(:users).through(:user_person_joins) }
+    end
+  end
+
   let(:person) { Person.create }
   let(:e1) { Event.create(name: '1', created_at: 1.year.ago)}
   let(:user) { User.create(email: 'tester@murphyweighin.com', password: 'eat2compete') }

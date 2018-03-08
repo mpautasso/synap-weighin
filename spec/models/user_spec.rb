@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
-  describe '#people' do
-    let(:user) { User.create(email: 'tester@murphyweighin.com', password: 'eat2compete') }
-    let(:person) { Person.create }
-    it 'has people' do
-      user.user_person_joins.create(person: person)
-      expect(user.people).to match_array([person])
+  describe 'validations' do
+    describe 'validate associations' do
+      it { should have_many(:user_person_joins) }
+      it { should have_many(:user_location_joins) }
+      it { should have_many(:people).through(:user_person_joins) }
+      it { should have_many(:locations).through(:user_location_joins) }
     end
   end
 end

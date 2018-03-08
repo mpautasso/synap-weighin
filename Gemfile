@@ -39,22 +39,14 @@ gem 'factory_bot_rails'
 gem 'faker'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14.0'
+  gem 'rspec-rails', '~> 3.7'
   gem 'pry'
   gem 'pry-nav'
   gem 'simplecov', '~> 0.9'
 end
 
+group :test do
+  gem 'shoulda-matchers', '~> 3.1'
+end
+
 gem 'rails_12factor', group: :production
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
