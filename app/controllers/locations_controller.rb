@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   def create
     @location = Location.create(location_params)
+
     redirect_to new_checkin_path
   end
 
@@ -13,6 +14,7 @@ class LocationsController < ApplicationController
   end
 
   private
+
   def location_params
     params.required(:location).permit([:name])
   end

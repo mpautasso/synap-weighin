@@ -1,5 +1,4 @@
 class CreateEvent
-
   def self.call(name, tagline)
     event = Event.create(name: name, tagline: tagline)
     Person.find_each do |p|

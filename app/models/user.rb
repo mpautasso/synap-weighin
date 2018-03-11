@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-	# == Associations
+  # == Associations
   has_many :user_person_joins
   has_many :people, through: :user_person_joins
   has_many :user_location_joins

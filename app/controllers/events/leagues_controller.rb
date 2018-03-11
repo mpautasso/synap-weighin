@@ -4,10 +4,6 @@ module Events
       @leagues = @event.leagues
     end
 
-    def index
-      @leagues = @event.leagues
-    end
-
     def show
       @league = @event.leagues.find params[:id]
     end

@@ -8,7 +8,7 @@ FactoryBot.define do
         people { create_list(:person, 5) }
       end
 
-      after :create do |event, evaluator|
+      after :create do |event, _evaluator|
         people.each do |person|
           CreateCheckin.call(person, event, 100, nil)
           create(:checkin, person: person)
@@ -25,7 +25,9 @@ FactoryBot.define do
 
       after :create do |event, evaluator|
         evaluator.people.each do |person|
-          evaluator.checkin_count.times { |i| CreateCheckin.call(person, event, 100 + i, nil) }
+          evaluator
+            .checkin_count
+            .times { |i| CreateCheckin.call(person, event, 100 + i, nil) }
         end
       end
     end

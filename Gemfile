@@ -1,4 +1,4 @@
-ruby "2.3.3"
+ruby '2.3.3'
 source 'https://rubygems.org'
 
 gem 'rake', '< 11.0'
@@ -21,10 +21,11 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+# Spring speeds up development by keeping your application running in the
+# background. Read more: https://github.com/rails/spring
+gem 'spring', group: :development
 
 gem 'haml-rails'
 gem 'pg'
@@ -39,9 +40,10 @@ gem 'factory_bot_rails'
 gem 'faker'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.7'
   gem 'pry'
   gem 'pry-nav'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'rubocop', '~> 0.53.0', require: false
   gem 'simplecov', '~> 0.9'
 end
 

@@ -10,16 +10,18 @@ describe Person do
   end
 
   let(:person) { Person.create }
-  let(:e1) { Event.create(name: '1', created_at: 1.year.ago)}
-  let(:user) { User.create(email: 'tester@murphyweighin.com', password: 'eat2compete') }
-  let(:c1) { CreateCheckin.call(person, e1, 100, user)}
-  let(:c2) { CreateCheckin.call(person, e1, 200, user)}
-  let(:c3) { CreateCheckin.call(person, e1, 250, user)}
+  let(:e1) { Event.create(name: '1', created_at: 1.year.ago) }
+  let(:user) do
+    User.create(email: 'tester@murphyweighin.com', password: 'eat2compete')
+  end
+  let(:c1) { CreateCheckin.call(person, e1, 100, user) }
+  let(:c2) { CreateCheckin.call(person, e1, 200, user) }
+  let(:c3) { CreateCheckin.call(person, e1, 250, user) }
 
-  let(:e2) { Event.create(name: '2', created_at: 1.day.ago)}
-  let(:c4) { CreateCheckin.call(person, e2, 101, user)}
-  let(:c5) { CreateCheckin.call(person, e2, 202, user)}
-  let(:c6) { CreateCheckin.call(person, e2, 303, user)}
+  let(:e2) { Event.create(name: '2', created_at: 1.day.ago) }
+  let(:c4) { CreateCheckin.call(person, e2, 101, user) }
+  let(:c5) { CreateCheckin.call(person, e2, 202, user) }
+  let(:c6) { CreateCheckin.call(person, e2, 303, user) }
 
   describe 'validations' do
     describe 'validate associations' do
@@ -48,7 +50,7 @@ describe Person do
       end
 
       context 'with two checkins' do
-        before { c1; c2 }
+        before { c1; c2 } # rubocop:disable Style/Semicolon
 
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(100)
@@ -56,7 +58,7 @@ describe Person do
       end
 
       context 'with many checkins' do
-        before { c1; c2; c3}
+        before { c1; c2; c3 } # rubocop:disable Style/Semicolon
 
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(150)
@@ -64,7 +66,7 @@ describe Person do
       end
 
       context 'with many events' do
-        before { c4; c5; c6 }
+        before { c4; c5; c6 } # rubocop:disable Style/Semicolon
 
         it 'only uses the checkins from the last event' do
           expect(subject).to eql(202)
@@ -73,7 +75,7 @@ describe Person do
     end
 
     context 'with an event specified' do
-      before { c4; c5; c6 }
+      before { c4; c5; c6 } # rubocop:disable Style/Semicolon
       subject { person.up_by(e1) }
 
       context 'with 0 checkins' do
@@ -91,7 +93,7 @@ describe Person do
       end
 
       context 'with two checkins' do
-        before { c1; c2 }
+        before { c1; c2 } # rubocop:disable Style/Semicolon
 
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(100)
@@ -99,7 +101,7 @@ describe Person do
       end
 
       context 'with many checkins' do
-        before { c1; c2; c3}
+        before { c1; c2; c3 } # rubocop:disable Style/Semicolon
 
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(150)
@@ -126,7 +128,7 @@ describe Person do
     end
 
     context 'with two checkins' do
-      before { c1; c2 }
+      before { c1; c2 } # rubocop:disable Style/Semicolon
 
       it 'calculates the difference between first and last Checkin' do
         expect(subject.to_f).to eq(100.0)
@@ -134,7 +136,7 @@ describe Person do
     end
 
     context 'with many checkins' do
-      before { c1; c2; c3}
+      before { c1; c2; c3 } # rubocop:disable Style/Semicolon
 
       it 'calculates the difference between first and last Checkin' do
         expect(subject.to_f).to eq(150.0)
@@ -143,7 +145,7 @@ describe Person do
 
     context 'with many events' do
       subject { person.percentage_change(e2) }
-      before { c4; c5; c6 }
+      before { c4; c5; c6 } # rubocop:disable Style/Semicolon
 
       it 'only uses the checkins from the last event' do
         expect(subject.to_f).to eql(200.0)
@@ -155,18 +157,21 @@ describe Person do
     subject { person.checkin_diffs }
 
     context 'with one event' do
-      before {c1; c2; c3}
+      before { c1; c2; c3 } # rubocop:disable Style/Semicolon
 
       it 'gives the difference between checkins, in order' do
-        expect(subject).to eql({"1" => ['100.00','150.00']})
+        expect(subject).to eql('1' => ['100.00', '150.00'])
       end
     end
 
     context 'with many events' do
-      before { c4; c5; c6; c1; c2; c3; }
+      before { c4; c5; c6; c1; c2; c3; } # rubocop:disable Style/Semicolon
 
       it 'maps the events to the checkins' do
-        expect(subject).to eql({"1" => ['100.00','150.00'], "2" => ['101.00', '202.00']})
+        expect(subject).to eql(
+          '1' => ['100.00', '150.00'],
+          '2' => ['101.00', '202.00']
+        )
       end
     end
   end
