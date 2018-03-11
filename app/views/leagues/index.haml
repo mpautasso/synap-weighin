@@ -1,0 +1,18 @@
+%h1{ class: 'text-center' }= 'Leagues list:'
+%br
+%div{ class: 'table-container' }
+  %table{ border: 0, class: 'table table-condensed borderless' }
+    %tr
+      %th{ class: 'ordinal' }
+      %th{ class: 'text-left person-name' } NAME
+      %th{ class: 'person-name'}
+      %th{ class: 'text-left person-name' } # PARTICIPANTS
+    - @leagues.each_with_index do |league, index|
+      %tr
+        %td{ class: 'ordinal' }= index
+        %td{ class: 'text-left weight' }= link_to(league.name, league_path(league))
+        %td{ class: 'text-left weight' }
+        %td{ class: 'text-left weight' }= league.people.count
+
+.actions
+  = link_to('EVENTS', root_path)

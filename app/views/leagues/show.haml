@@ -1,0 +1,15 @@
+%h1= "LEAGUE #{@league.name}"
+%br
+%h2 Participants
+%br
+- @league.people.each_with_index do |person, index|
+  %table
+    %tr
+      %td{ class: 'ordinal' }= index
+      %td{ class: 'text-left' }= link_to(person.name, person_path(person.id))
+  %br
+
+.actions
+  = link_to('LEAGUES LIST', leagues_path)
+  |
+  = link_to('EVENTS LIST', events_path)

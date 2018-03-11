@@ -1,5 +1,5 @@
-%h1{ class: 'text-center' } Please create a New Event
-
+%h1{ class: 'text-center' }= "New league for #{@event.name}"
+%br
 - flash.each do |key, value|
   .alert{ class: "alert-#{key}" }
     %button.close{ data: { dismiss: 'alert' } } x
@@ -7,17 +7,13 @@
       = value
 %div
   .input-group
-    = form_for :event, url: events_path do |f|
+    = form_for :league, url: event_leagues_path do |f|
+      %p
       = f.label :name
       %br
       = f.text_field :name, { autocomplete: :off, class: 'form-control' }
       %br
-      %br
-      %br
-      = f.label :tagline
-      %br
-      = f.text_field :tagline, { autocomplete: :off, class: 'form-control' }
       = f.submit class: 'btn btn-primary text-uppercase btn-block', value: 'SAVE >'
 
 %h3
-  %a= link_to('< Back', root_path, class: 'btn btn-default btn-block navbar navbar-fixed-bottom')
+  %a= link_to('< Back', event_leagues_path(@event), class: 'btn btn-default btn-block navbar navbar-fixed-bottom')

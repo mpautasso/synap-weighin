@@ -1,15 +1,17 @@
 class EventsController < ApplicationController
+
   def index
-    @events = Event.all.order(:id)
+    @events = Event.all
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find params[:id]
   end
 
   def create
     @event = Event.create(event_params)
-    redirect_to people_path
+
+    redirect_to root_path
   end
 
   private

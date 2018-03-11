@@ -13,39 +13,57 @@ describe Person do
   let(:c5) { CreateCheckin.call(person, e2, 202, user)}
   let(:c6) { CreateCheckin.call(person, e2, 303, user)}
 
+  describe 'validations' do
+    describe 'validate associations' do
+      it { should have_many(:checkins) }
+      it { should have_many(:user_person_joins) }
+      it { should have_many(:users).through(:user_person_joins) }
+    end
+  end
+
   describe '#up_by' do
     subject { person.up_by }
+
     context 'with no event specified' do
       context 'with 0 checkins' do
         it 'returns nil' do
           expect(subject).to be_nil
         end
       end
+
       context 'with one checkin' do
         before { c1 }
+
         it 'returns 0' do
           expect(subject).to be_nil
         end
       end
+
       context 'with two checkins' do
         before { c1; c2 }
+
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(100)
         end
       end
+
       context 'with many checkins' do
         before { c1; c2; c3}
+
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(150)
         end
       end
+
       context 'with many events' do
         before { c4; c5; c6 }
+
         it 'only uses the checkins from the last event' do
           expect(subject).to eql(202)
         end
       end
     end
+
     context 'with an event specified' do
       before { c4; c5; c6 }
       subject { person.up_by(e1) }
@@ -55,68 +73,90 @@ describe Person do
           expect(subject).to be_nil
         end
       end
+
       context 'with one checkin' do
         before { c1 }
+
         it 'returns 0' do
           expect(subject).to be_nil
         end
       end
+
       context 'with two checkins' do
         before { c1; c2 }
+
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(100)
         end
       end
+
       context 'with many checkins' do
         before { c1; c2; c3}
+
         it 'calculates the difference between first and last Checkin' do
           expect(subject).to eql(150)
         end
       end
     end
   end
+
   describe '#percentage_change' do
-    subject { person.percentage_change }
+    subject { person.percentage_change(e1) }
+
     context 'with 0 checkins' do
       it 'returns nil' do
         expect(subject).to be_nil
       end
     end
+
     context 'with one checkin' do
       before { c1 }
+
       it 'returns 0' do
         expect(subject).to be_nil
       end
     end
+
     context 'with two checkins' do
       before { c1; c2 }
+
       it 'calculates the difference between first and last Checkin' do
         expect(subject.to_f).to eq(100.0)
       end
     end
+
     context 'with many checkins' do
       before { c1; c2; c3}
+
       it 'calculates the difference between first and last Checkin' do
         expect(subject.to_f).to eq(150.0)
       end
     end
+
     context 'with many events' do
+      subject { person.percentage_change(e2) }
       before { c4; c5; c6 }
+
       it 'only uses the checkins from the last event' do
         expect(subject.to_f).to eql(200.0)
       end
     end
   end
+
   describe '#checkin_diffs' do
     subject { person.checkin_diffs }
+
     context 'with one event' do
       before {c1; c2; c3}
+
       it 'gives the difference between checkins, in order' do
         expect(subject).to eql({"1" => ['100.00','150.00']})
       end
     end
+
     context 'with many events' do
       before { c4; c5; c6; c1; c2; c3; }
+
       it 'maps the events to the checkins' do
         expect(subject).to eql({"1" => ['100.00','150.00'], "2" => ['101.00', '202.00']})
       end

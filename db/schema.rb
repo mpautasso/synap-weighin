@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123070943) do
+ActiveRecord::Schema.define(version: 20180308190348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,37 @@ ActiveRecord::Schema.define(version: 20171123070943) do
   add_index "checkins", ["person_id"], name: "index_checkins_on_person_id", using: :btree
   add_index "checkins", ["user_id"], name: "index_checkins_on_user_id", using: :btree
 
+  create_table "event_leagues", force: true do |t|
+    t.integer  "event_id",   null: false
+    t.integer  "league_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "event_leagues", ["event_id"], name: "index_event_leagues_on_event_id", using: :btree
+  add_index "event_leagues", ["league_id"], name: "index_event_leagues_on_league_id", using: :btree
+
   create_table "events", force: true do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "tagline"
+  end
+
+  create_table "league_people", force: true do |t|
+    t.integer  "league_id",  null: false
+    t.integer  "person_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "league_people", ["league_id"], name: "index_league_people_on_league_id", using: :btree
+  add_index "league_people", ["person_id"], name: "index_league_people_on_person_id", using: :btree
+
+  create_table "leagues", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "locations", force: true do |t|
