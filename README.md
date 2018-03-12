@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mpautasso/synap-weighin.svg?branch=master)](https://travis-ci.org/mpautasso/synap-weighin)
+
 # Synap Weighin -  Track your weight gain on holidays
 
 ## Installation
