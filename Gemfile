@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rake', '< 11.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 
 gem 'haml-rails'
-gem 'pg'
+gem 'pg', '0.20'
 
 gem 'twitter-bootstrap-rails'
 

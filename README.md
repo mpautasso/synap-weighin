@@ -2,7 +2,7 @@
 
 ## Installation
 
-Synap Weighin is a Rails 4.1.8 application.
+Synap Weighin is a Rails 4.2.10 application.
 
 Dependencies:
 
